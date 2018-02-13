@@ -99,11 +99,16 @@
                                     <constraint firstAttribute="width" constant="72" id="veX-y1-1LW"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="75u-Wd-pa4">
+                                <rect key="frame" x="309" y="573" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vs3-Am-vjO" secondAttribute="trailing" constant="20" id="0mS-Py-Mes"/>
+                            <constraint firstItem="75u-Wd-pa4" firstAttribute="centerX" secondItem="2TG-B6-cwR" secondAttribute="centerX" id="2cQ-yG-Oq9"/>
                             <constraint firstItem="vs3-Am-vjO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="3B1-6y-TsN"/>
+                            <constraint firstItem="75u-Wd-pa4" firstAttribute="centerY" secondItem="2TG-B6-cwR" secondAttribute="centerY" id="ES0-Df-wJ6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1NC-29-mLR" secondAttribute="bottom" constant="20" id="LMg-Yn-UOe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2TG-B6-cwR" secondAttribute="trailing" constant="20" id="Omz-zc-fK3"/>
                             <constraint firstItem="qMn-xV-gbB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Zqy-Wb-Xjt"/>
@@ -123,6 +128,7 @@
                         <outlet property="flashBtn" destination="1NC-29-mLR" id="SuL-S4-dYi"/>
                         <outlet property="identicationLbl" destination="bGt-t5-FLm" id="3pK-Ls-seU"/>
                         <outlet property="roundedLblView" destination="vs3-Am-vjO" id="IcR-CK-Uoc"/>
+                        <outlet property="spinner" destination="75u-Wd-pa4" id="uuP-UG-CvC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
