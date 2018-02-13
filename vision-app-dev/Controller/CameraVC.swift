@@ -24,6 +24,7 @@ class CameraVC: UIViewController {
     
     var photoData:Data?
     
+    var flashControlState:FlashState = .off
     
     
     @IBOutlet weak var cameraView: UIView!
@@ -92,6 +93,13 @@ class CameraVC: UIViewController {
         
         settings.previewPhotoFormat = previewFormat
         
+        if flashControlState == .off{
+            settings.flashMode = .off
+        }else{
+            settings.flashMode = .on
+        }
+        
+        
         cameraOutput.capturePhoto(with: settings, delegate: self)
     }
     
@@ -105,7 +113,6 @@ class CameraVC: UIViewController {
                 self.identicationLbl.text = "我不是很確定這是什麼，請再試一次"
                 self.confidenceLbl.text = ""
                 break
-                
             }else{
                 self.identicationLbl.text = classification.identifier
                 self.confidenceLbl.text = "信心指數:\(Int(classification.confidence * 100))%"
@@ -114,7 +121,20 @@ class CameraVC: UIViewController {
             }
         }
     }
+    @IBAction func flashButttonWasPressed(_ sender: Any) {
+        switch flashControlState{
+        case .off:
+            flashBtn.setTitle("FLASH ON", for: .normal)
+            flashControlState = .on
+        case .on:
+            flashBtn.setTitle("FLASH OFF", for: .normal)
+            flashControlState = .off
+        }
+    }
 }
+
+
+
 
 extension CameraVC:AVCapturePhotoCaptureDelegate{
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {

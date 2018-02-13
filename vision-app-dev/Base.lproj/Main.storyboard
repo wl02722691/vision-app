@@ -80,7 +80,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NC-29-mLR" customClass="RoundedShadowButton" customModule="vision_app_dev" customModuleProvider="target">
                                 <rect key="frame" x="20" y="611" width="95" height="36"/>
-                                <color key="backgroundColor" red="0.42324018478393555" green="0.35600262880325317" blue="0.48237323760986328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.20695638656616211" green="0.35975989699363708" blue="0.4897271990776062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="7bj-6a-NmJ"/>
                                 </constraints>
@@ -88,6 +88,9 @@
                                 <state key="normal" title="FLASH OFF">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="flashButttonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QcQ-pr-WLf"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-B6-cwR" customClass="RoundedShadowImageView" customModule="vision_app_dev" customModuleProvider="target">
                                 <rect key="frame" x="283" y="519" width="72" height="128"/>
