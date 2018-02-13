@@ -8,6 +8,13 @@
 
 import UIKit
 import AVFoundation
+import CoreML
+import Vision
+
+enum FlashState{
+    case off
+    case on
+}
 
 class CameraVC: UIViewController {
 
@@ -16,6 +23,8 @@ class CameraVC: UIViewController {
     var previewLayer:AVCaptureVideoPreviewLayer!
     
     var photoData:Data?
+    
+    
     
     @IBOutlet weak var cameraView: UIView!
     
@@ -43,6 +52,7 @@ class CameraVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCameraView))
         tap.numberOfTapsRequired = 1
+        //點一下後會觸發的內容
         
         super.viewWillAppear(animated)
         captureSession = AVCaptureSession()
@@ -84,6 +94,26 @@ class CameraVC: UIViewController {
         
         cameraOutput.capturePhoto(with: settings, delegate: self)
     }
+    
+    func resultsMethod(request:VNRequest,error:Error?){
+        //handle changing the label text
+        guard let results = request.results as? [VNClassificationObservation] else {return}
+        for classification in results{
+            print(classification.identifier)
+            print(classification.confidence)
+            if classification.confidence < 0.5{
+                self.identicationLbl.text = "我不是很確定這是什麼，請再試一次"
+                self.confidenceLbl.text = ""
+                break
+                
+            }else{
+                self.identicationLbl.text = classification.identifier
+                self.confidenceLbl.text = "信心指數:\(Int(classification.confidence * 100))%"
+                break
+              
+            }
+        }
+    }
 }
 
 extension CameraVC:AVCapturePhotoCaptureDelegate{
@@ -92,6 +122,17 @@ extension CameraVC:AVCapturePhotoCaptureDelegate{
             debugPrint(error)
         }else{
             photoData = photo.fileDataRepresentation()
+            
+            do{
+                let model = try VNCoreMLModel(for: SqueezeNet().model)
+                let request = VNCoreMLRequest(model: model, completionHandler: resultsMethod)
+                let handler = VNImageRequestHandler.init(data: photoData!)
+                try handler.perform([request])
+            }catch{
+                    debugPrint(error)
+                //Handle errors
+            }
+            
             
             let image = UIImage(data: photoData!)
             self.captureImageView.image = image
