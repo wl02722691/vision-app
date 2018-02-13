@@ -1,24 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Menlo.ttc">
+            <string>Menlo-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="HV7-vs-EwE">
+            <objects>
+                <viewController id="7Mh-NR-NQ4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uOO-HQ-Xzb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="螢幕快照 2018-02-13 下午8.23.35" translatesAutoresizingMaskIntoConstraints="NO" id="bZ3-so-g1W">
+                                <rect key="frame" x="92" y="171" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Ndm-Lx-Y4B"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3iB-Ww-GOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-588" y="42"/>
+        </scene>
+        <!--CameraVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CameraVC" customModule="vision_app_dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMn-xV-gbB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96509641408920288" green="0.44547998905181885" blue="0.50074326992034912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vs3-Am-vjO" customClass="RoundShadowView" customModule="vision_app_dev" customModuleProvider="target">
+                                <rect key="frame" x="20" y="50" width="335" height="60"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ey9-v3-oT9">
+                                        <rect key="frame" x="8" y="8" width="319" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="物體名稱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bGt-t5-FLm">
+                                                <rect key="frame" x="0.0" y="0.0" width="319" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="信心指數" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PtO-wj-Y6d">
+                                                <rect key="frame" x="0.0" y="27.5" width="319" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                                <color key="textColor" red="0.99651390314102173" green="0.99651390314102173" blue="0.99302679300308228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20695638656616211" green="0.35975989699363708" blue="0.4897271990776062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ey9-v3-oT9" firstAttribute="leading" secondItem="vs3-Am-vjO" secondAttribute="leading" constant="8" id="KhW-Ef-E2t"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ey9-v3-oT9" secondAttribute="trailing" constant="8" id="NE6-CZ-Yng"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ey9-v3-oT9" secondAttribute="bottom" constant="8" id="e5B-g7-bJr"/>
+                                    <constraint firstAttribute="height" constant="60" id="hOC-48-bEZ"/>
+                                    <constraint firstItem="Ey9-v3-oT9" firstAttribute="top" secondItem="vs3-Am-vjO" secondAttribute="top" constant="8" id="ylo-Hf-3x1"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NC-29-mLR" customClass="RoundedShadowButton" customModule="vision_app_dev" customModuleProvider="target">
+                                <rect key="frame" x="20" y="611" width="95" height="36"/>
+                                <color key="backgroundColor" red="0.42324018478393555" green="0.35600262880325317" blue="0.48237323760986328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="7bj-6a-NmJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <state key="normal" title="FLASH OFF">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-B6-cwR" customClass="RoundedShadowImageView" customModule="vision_app_dev" customModuleProvider="target">
+                                <rect key="frame" x="283" y="519" width="72" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="SOW-K2-fpd"/>
+                                    <constraint firstAttribute="width" constant="72" id="veX-y1-1LW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vs3-Am-vjO" secondAttribute="trailing" constant="20" id="0mS-Py-Mes"/>
+                            <constraint firstItem="vs3-Am-vjO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="3B1-6y-TsN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1NC-29-mLR" secondAttribute="bottom" constant="20" id="LMg-Yn-UOe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2TG-B6-cwR" secondAttribute="trailing" constant="20" id="Omz-zc-fK3"/>
+                            <constraint firstItem="qMn-xV-gbB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Zqy-Wb-Xjt"/>
+                            <constraint firstItem="vs3-Am-vjO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bhm-ye-8gd"/>
+                            <constraint firstItem="qMn-xV-gbB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="c1s-OH-dRA"/>
+                            <constraint firstItem="qMn-xV-gbB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="fgZ-pW-JmN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2TG-B6-cwR" secondAttribute="bottom" constant="20" id="mvS-4f-5jK"/>
+                            <constraint firstItem="1NC-29-mLR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pI2-vE-xTX"/>
+                            <constraint firstItem="qMn-xV-gbB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rCz-UP-7yD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="cameraView" destination="qMn-xV-gbB" id="uKt-b6-7eQ"/>
+                        <outlet property="captureImageView" destination="2TG-B6-cwR" id="Ybg-9G-Cdw"/>
+                        <outlet property="confidenceLbl" destination="PtO-wj-Y6d" id="e56-uk-LOh"/>
+                        <outlet property="flashBtn" destination="1NC-29-mLR" id="SuL-S4-dYi"/>
+                        <outlet property="identicationLbl" destination="bGt-t5-FLm" id="3pK-Ls-seU"/>
+                        <outlet property="roundedLblView" destination="vs3-Am-vjO" id="IcR-CK-Uoc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="77.599999999999994" y="32.833583208395808"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="螢幕快照 2018-02-13 下午8.23.35" width="254" height="296"/>
+    </resources>
 </document>
