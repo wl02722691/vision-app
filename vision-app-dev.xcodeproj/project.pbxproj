@@ -15,7 +15,7 @@
 		690730E0203311B40010784E /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690730DF203311B40010784E /* RoundShadowView.swift */; };
 		690730E2203313550010784E /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690730E1203313550010784E /* RoundedShadowButton.swift */; };
 		690730E6203314090010784E /* RoundedShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690730E5203314090010784E /* RoundedShadowImageView.swift */; };
-		690730E92033482B0010784E /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 690730E7203347FE0010784E /* SqueezeNet.mlmodel */; };
+		69E559292033C66C0089337F /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 690730E7203347FE0010784E /* SqueezeNet.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				690730CB20330B050010784E /* CameraVC.swift in Sources */,
-				690730E92033482B0010784E /* SqueezeNet.mlmodel in Sources */,
+				69E559292033C66C0089337F /* SqueezeNet.mlmodel in Sources */,
 				690730C920330B050010784E /* AppDelegate.swift in Sources */,
 				690730E0203311B40010784E /* RoundShadowView.swift in Sources */,
 				690730E2203313550010784E /* RoundedShadowButton.swift in Sources */,

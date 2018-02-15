@@ -16,15 +16,27 @@ enum FlashState{
     case on
 }
 
-class CameraVC: UIViewController {
+enum SoundState{
+    case off
+    case on
+}
 
+
+class CameraVC: UIViewController{
+    
+    var imagePicker:UIImagePickerController!
+    
     var captureSession:AVCaptureSession!
+    
     var cameraOutput:AVCapturePhotoOutput!
+    
     var previewLayer:AVCaptureVideoPreviewLayer!
     
     var photoData:Data?
     
     var flashControlState:FlashState = .off
+    
+    var SoundControlState:SoundState = .off
     
     var speechSynthesizer = AVSpeechSynthesizer()
     
@@ -33,6 +45,9 @@ class CameraVC: UIViewController {
     @IBOutlet weak var captureImageView: RoundedShadowImageView!
     
     @IBOutlet weak var flashBtn: RoundedShadowButton!
+    
+    @IBOutlet weak var soundBtn: RoundedShadowButton!
+    
     
     @IBOutlet weak var identicationLbl: UILabel!
     
@@ -93,11 +108,6 @@ class CameraVC: UIViewController {
     
     
     @objc func didTapCameraView() {
-        self.cameraView.isUserInteractionEnabled = false
-        self.spinner.isHidden = false
-        self.spinner.startAnimating()
-        
-        
         let settings = AVCapturePhotoSettings()
         let previewPixelType = settings .__availablePreviewPhotoPixelFormatTypes.first! //回傳first的意思是最基本的相機照片，在這個availablePreviewPhotoPixelFormatTypes的Array中的第一個
         let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType, kCVPixelBufferWidthKey as String: 160, kCVPixelBufferHeightKey as String: 160]
@@ -110,9 +120,22 @@ class CameraVC: UIViewController {
             settings.flashMode = .on
         }
         
+        switch SoundControlState {
+        case .on:
+            print("SoundControlState == .on")
+            self.cameraView.isUserInteractionEnabled = false
+            self.soundBtn.isUserInteractionEnabled = false
+            self.spinner.isHidden = false
+            self.spinner.startAnimating()
+            
+        case .off:
+            break
+        }
         
         cameraOutput.capturePhoto(with: settings, delegate: self)
     }
+    
+
     
     func resultsMethod(request:VNRequest,error:Error?){
         //handle changing the label text
@@ -120,7 +143,8 @@ class CameraVC: UIViewController {
         for classification in results{
             print(classification.identifier)
             print(classification.confidence)
-            if classification.confidence < 0.5{
+            
+            if classification.confidence < 0.5 {
                 let unknowObjectMessage = "我不是很確定這是什麼，請再試一次"
                 self.identicationLbl.text = unknowObjectMessage
                 self.confidenceLbl.text = ""
@@ -133,6 +157,7 @@ class CameraVC: UIViewController {
                 self.confidenceLbl.text = "信心指數:\(confidentce)%"
                 let completeSentence = "我\(confidentce)%確定，他是一個\(identification)"
                 synthesizeSpeech(fromString: completeSentence)
+                
                 break
               
             }
@@ -140,34 +165,64 @@ class CameraVC: UIViewController {
     }
     
     func synthesizeSpeech(fromString string:String) {
-        let speechUtterance = AVSpeechUtterance(string: string)
-        speechSynthesizer.speak(speechUtterance)
-    }
+        switch SoundControlState {
+        case .on:
+            let speechUtterance = AVSpeechUtterance(string: string)
+            speechSynthesizer.speak(speechUtterance)
+        case .off:
+            break
+                }
+            }
     
+    @IBAction func soundButtinWasPressed(_ sender: Any) {
+        switch SoundControlState{
+        case .off:
+            let soundImage = UIImage(named: "sound")
+            soundBtn.setImage(soundImage, for: .normal)
+            SoundControlState = .on
+            print("on")
+            
+        case .on:
+            
+            let soundoffImage = UIImage(named: "soundOff")
+            soundBtn.setImage(soundoffImage, for: .normal)
+            SoundControlState = .off
+            print("off")
+            
+        }
+    }
     
     
     @IBAction func flashButttonWasPressed(_ sender: Any) {
         switch flashControlState{
         case .off:
-            flashBtn.setTitle("FLASH ON", for: .normal)
+            let flashimage = UIImage(named: "flash")
+            flashBtn.setImage(flashimage, for: .normal)
             flashControlState = .on
         case .on:
-            flashBtn.setTitle("FLASH OFF", for: .normal)
+            let flashoffimage = UIImage(named: "flash-off")
+            flashBtn.setImage(flashoffimage, for: .normal)
             flashControlState = .off
+
+
         }
     }
+    
+    
+    
+    
 }
 
 
 
 
 extension CameraVC:AVCapturePhotoCaptureDelegate{
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    func photoOutput(_ output: AVCapturePhotoOutput?, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let error = error{
             debugPrint(error)
         }else{
             photoData = photo.fileDataRepresentation()
-            
+        
             do{
                 let model = try VNCoreMLModel(for: SqueezeNet().model)
                 let request = VNCoreMLRequest(model: model, completionHandler: resultsMethod)
@@ -189,16 +244,11 @@ extension CameraVC:AVCapturePhotoCaptureDelegate{
 
 extension CameraVC:AVSpeechSynthesizerDelegate{
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        self.cameraView.isUserInteractionEnabled = true
-        self.spinner.isHidden = true
-        self.spinner.stopAnimating()
+            self.cameraView.isUserInteractionEnabled = true
+            self.soundBtn.isUserInteractionEnabled = true
+            self.spinner.isHidden = true
+            self.spinner.stopAnimating()
+
     }
 }
-
-
-
-
-
-
-
 
